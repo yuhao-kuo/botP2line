@@ -9,7 +9,7 @@ import sys
 def _push_image_to_imgur(imagePath):
     img_cmd = "imgur {0} 2>> {1}".format(imagePath, '/tmp/del.log')
     stdout = os.popen(img_cmd)
-    for d in stdout.readlines()
+    for d in stdout.readlines():
         return d.strip()
     return None
 
@@ -44,10 +44,11 @@ def LINE_TransmitImage(img_path):
     if channel_access_token is None:
         print('user_id is None')
         sys.exit(1)
-    url = _push_image_to_imgur(img_path)
-    if url is None:
+    imgur_url = _push_image_to_imgur(img_path)
+    if imgur_url is None:
         print('push to imgur failure')
         sys.exit(1)
     line_bot_api = LineBotApi(channel_access_token)
     print("push image")
-    line_bot_api.push_message(user_id, ImageSendMessage(originalContentUrl=url, previewImageUrl=url))
+    line_bot_api.push_message(user_id, ImageSendMessage(original_content_url=imgur_url, preview_image_url=imgur_url))
+
