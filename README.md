@@ -25,19 +25,7 @@ add all infomation
 sh install_tools.sh
 ```
 
-## test your settings
-
-```
-sh testenv.sh
-```
-
-if return is null then run next
-
-```
-source ~/.profile
-```
-
-ok! next test
+ok! next run unit test code.
 
 ```
 python testpush.py

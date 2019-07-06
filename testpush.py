@@ -6,4 +6,4 @@ import time
 
 pushmess.LINE_TransmitText('hello message is a test !!!')
 time.sleep(2)
-pushmess.LINE_TransmitImage('kaus.png')
+pushmess.LINE_TransmitImage("kuas.png")
