@@ -9,7 +9,7 @@
 # API Key provided by Bart;
 # replace with your own or specify yours as IMGUR_CLIENT_ID envionment variable
 # to avoid limits
-default_client_id=$2
+default_client_id=`cat apinfo.conf | tail -n 1 | cut -d '=' -f 2`
 client_id="${IMGUR_CLIENT_ID:=$default_client_id}"
 
 # Function to output usage instructions
@@ -97,21 +97,6 @@ while [ $# -gt 0 ]; do
 		clip+=$'\n'
 	fi
 done
-
-# Put the URLs on the clipboard if we can
-if type pbcopy &>/dev/null; then
-	echo -n "$clip" | pbcopy
-elif [ $DISPLAY ]; then
-	if type xsel &>/dev/null; then
-		echo -n "$clip" | xsel -i
-	elif type xclip &>/dev/null; then
-		echo -n "$clip" | xclip
-	else
-		echo "Haven't copied to the clipboard: no xsel or xclip" >&2
-	fi
-else
-	echo "Haven't copied to the clipboard: no \$DISPLAY or pbcopy" >&2
-fi
 
 if $errors; then
 	exit 1

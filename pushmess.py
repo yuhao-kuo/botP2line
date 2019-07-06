@@ -11,8 +11,8 @@ secret = None
 token = None
 imgur_uid = None
 
-def _push_image_to_imgur(imagePath, uid):
-    img_cmd = "./imgur {0} {1} 2>> {2}".format(imagePath, uid, '/tmp/del.log')
+def _push_image_to_imgur(imagePath):
+    img_cmd = "./imgur {0} 2>> {1}".format(imagePath, '/tmp/del.log')
     stdout = os.popen(img_cmd)
     for d in stdout.readlines():
         return d.strip()
@@ -74,7 +74,7 @@ def LINE_TransmitImage(img_path):
     if imgur_user_id is None:
         print('imgur_id is None')
         sys.exit(1)
-    imgur_url = _push_image_to_imgur(img_path, imgur_user_id)
+    imgur_url = _push_image_to_imgur(img_path)
     if imgur_url is None:
         print(imgur_url)
         print('push to imgur failure')
